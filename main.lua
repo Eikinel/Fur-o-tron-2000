@@ -173,7 +173,7 @@ function love.load()
    
    -- Global variables --
    
-   noxt = 81
+   noxt = 1
    gamestate = "entername"
    user_choice = 0
    blink = 0
