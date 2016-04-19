@@ -110,7 +110,14 @@ function love.load()
 	 { versus.name, versus.embarrassed, versus.color, "Oups, question debile du coup, il est vrai.\nVite, passons a autre chose avant que j'ai l'air trop bete !", {}, 55},
 	 { versus.name, versus.happy, versus.color, "Encore une petite anecdote ursidesque.\nSavais-tu que les ours blancs n'etaient pas vraiment blanc ? En realite, ses poils sont non pigmentes, translucide et creux. L'impression de blanc est uniquement du a la reflexion de la lumiere sur la partie interne du poil. Les ours blancs sont memes noir de peau !", {}, 56},
 	 { versus.name, versus.embarrassed, versus.color, "Mais je m'egare encore. Decidement, je n'arreterai jamais de parler. Je suis une vraie pipelette !", {}, 57},
-	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\n", {""}, function() user.nose = user_choice return (58 + user_choice) end}
+	 
+	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\nParmi toutes ces familles d'animaux, lequel preferes-tu ?", {"Le felin.", "Le canide. (renard inclus)", "Les ursides.", "Les rapaces.", "Les porcides.", "Le DRAGON."}, function() user.nose = user_choice return (58 + user_choice) end},
+	 { "@@username", nil, user.color, "Les felins, ce sont mes boules de poils favorites.\nAvec leurs petits coussinets tout mignon, leur petite tete quand ils sont a la recherche de calins, leur facon de se frotter a toi...\nAaaah, je foooonds !", {}, 64},
+	 { "@@username", nil, user.color, "Les canides, ils sont vraiment top ! Que ce soit la loyaute du chien ou la sauvagerie du loup ou meme la mignonitude du renard, ils ont tout pour plaire ces animaux !", {}, 64},
+	 { "@@username", nil, user.color, "Les tous gros tout mignon nounours comme toi ! De toutes les couleurs ou de toutes les tailles, ils me font craquer. J'ai juste envie de leur faire un gros calin tout poilu !\n(Bon choix, joueur, bon choix. - Eikinel, The Dev)", {}, 64},
+	 { "@@username", nil, user.color, "Les aigles, les pyguarges, les hiboux. Ces petits animaux a plumes ont tout ce qu'il y a de plus majestueux. Rapidite, precision et mignonnerie, ce sont de loin les meilleurs !", {}, 64},
+	 { "@@username", nil, user.color, "Les porcides bien sur ! Le sanglier avec ses belles defenses, qui ne recule devant rien. Ou meme le porc avec ses manieres ! Je les adoooooooooooore !", {}, 64},
+	 { "@@username", nil, user.color, "Ils ont beau etre legendaires, je surkiffe les D R A G O N S. Il n'y a pas plus classe que ca ! Qui n'a jamais reve de voler sur le dos d'un dragon hein ? Qui ? Personne ! C'est normal, ce sont les meilleurs. Imposant et terriblement attirant, voila ce que j'aime !", {}, 64},
       }
    }
    
@@ -128,7 +135,7 @@ function love.load()
 
    -- Global variables --
    
-   noxt = 1
+   noxt = 56
    gamestate = "entername"
    user_choice = 0
    blink = 0
