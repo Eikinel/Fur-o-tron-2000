@@ -40,12 +40,14 @@ function love.load()
       hair = 0,
       hair_color = 0,
       nose = 0,
-      
+      ears = 0,
+      eyebrow = 0,
+      eye_color = 0
    }
    
    dialogue = {
       text = {
-	 { versus.name, versus.happy, versus.color, "Salut l'ami ! Je suis Versus, je serai ton visagiste personnel pour cette session.\n\nQuel est ton nom ?", {}, 2},
+	 { versus.name, versus.happy, versus.color, "Salut l'ami ! Je suis "..versus.name..", je serai ton visagiste personnel pour cette session.\n\nQuel est ton nom ?", {}, 2},
 	 { versus.name, versus.laughing, versus.color, "@@username ? C'est un joli nom !\nBien, nous allons pouvoir commencer !\nJe vais te poser quelques questions, ton avatar en furry apparaitra a la fin ! Es-tu pret ?" , {"Oui", "Non"}, {4, 3}},
 	 { versus.name, versus.surprised, versus.color, "Oh, c'est bien dommage... A une autre fois alors !", {}, function() love.event.quit() end},
 	 { versus.name, versus.happy, versus.color, "Super ! Voici la premiere question.\n\nEs-tu un garcon ou une fille ?", {"Un garcon", "Une fille"}, function() user.gender = user_choice return (5 + user_choice) end},
@@ -111,20 +113,49 @@ function love.load()
 	 { versus.name, versus.happy, versus.color, "Encore une petite anecdote ursidesque.\nSavais-tu que les ours blancs n'etaient pas vraiment blanc ? En realite, ses poils sont non pigmentes, translucide et creux. L'impression de blanc est uniquement du a la reflexion de la lumiere sur la partie interne du poil. Les ours blancs sont memes noir de peau !", {}, 56},
 	 { versus.name, versus.embarrassed, versus.color, "Mais je m'egare encore. Decidement, je n'arreterai jamais de parler. Je suis une vraie pipelette !", {}, 57},
 	 
-	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\nParmi toutes ces familles d'animaux, lequel preferes-tu ?", {"Le felin.", "Le canide. (renard inclus)", "Les ursides.", "Les rapaces.", "Les porcides.", "Les equides.", "Le DRAGON."}, function() user.nose = user_choice return (58 + user_choice) end},
-	 { "@@username", nil, user.color, "Les felins, ce sont mes boules de poils favorites.\nAvec leurs petits coussinets tout mignon, leur petite tete quand ils sont a la recherche de calins, leur facon de se frotter a toi...\nAaaah, je foooonds !", {}, 64},
-	 { "@@username", nil, user.color, "Les canides, ils sont vraiment top ! Que ce soit la loyaute du chien ou la sauvagerie du loup ou meme la mignonitude du renard, ils ont tout pour plaire ces animaux !", {}, 65},
-	 { "@@username", nil, user.color, "Les tous gros tout mignon nounours comme toi ! De toutes les couleurs ou de toutes les tailles, ils me font craquer. J'ai juste envie de leur faire un gros calin tout poilu !\n(Bon choix, joueur, bon choix. - Eikinel, The Dev)", {}, 66},
-	 { "@@username", nil, user.color, "Les aigles, les pyguarges, les hiboux. Ces petits animaux a plumes ont tout ce qu'il y a de plus majestueux. Rapidite, precision et mignonnerie, ce sont de loin les meilleurs !", {}, 67},
-	 { "@@username", nil, user.color, "Les porcides bien sur ! Le sanglier avec ses belles defenses, qui ne recule devant rien. Ou meme le porc avec ses manieres ! Je les adoooooooooooore !", {}, 68},
-	 { "@@username", nil, user.color, "Les equides, il n'y a que ca de vrai ! Se balader sur son dada, l'elever et le dresser... Plus qu'un animal, c'est un ami fidele qui me comprend !", {}, 68},
-	 { "@@username", nil, user.color, "Ils ont beau etre legendaires, je surkiffe les D R A G O N S. Il n'y a pas plus classe que ca ! Qui n'a jamais reve de voler sur le dos d'un dragon hein ? Qui ? Personne ! C'est normal, ce sont les meilleurs. Imposant et terriblement attirant, voila ce que j'aime !", {}, 68},
-	 { versus.name, versus.happy, versus.color, "Ooooh un cat lover ! C'est vrai qu'ils sont mignons. Un classique qui marche a tous les coups !", {}, 76},
-	 { versus.name, versus.laughing, versus.color, "Oh oui ! Un beau husky ou un petit renard comme RonRon (foxialzabul sur YouTube !), c'est teeeellement mignon !\nJ'ai un pote furry husky, Kouya. C'est une vraie creme !", {}, 76},
-	 { versus.name, versus.embarrassed, versus.color, "Aaaah... Ah oui ?\nSi au moins quelqu'un me trouve attirant alors je suis content. Les calins, c'est une vraie drogue pour moi !", {}, 76},
-	 { versus.name, versus.happy, versus.color, "Un animal a plumes donc ! Je les adore aussi, leur petit bec et leurs grandes ailes me font craquer. Pour sur que si j'en avais un je l'aurais deja pet depuis longtemps !", {}, 76},
-	 { versus.name, versus.happy, versus.color, "Ce n'est pas commun ca ! Ce que j'aime le plus chez les sangliers, ce sont leurs defenses. Iozen, une connaissance a moi, est un sacre champion. Il est respecte de tous, et c'est quelqu'un de formidable !\n(Bakemono no Ko, allez voir le film !)", {}, 76},
-	 { versus.name, versus.happy, versus.color, "Allez hu ! C'est beau un cheval. Vraiment tres intelligent !\nLe seul cheval que je connaisse est un peu arrogant sur les bords, mais je sais bien qu'ils ne sont pas tous comme ca.\n(P.S : Joue a Morenatsu, @@username !)", {}, 76},
+	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\nParmi toutes ces familles d'animaux, lequel preferes-tu ?", {"Le felin.", "Le canide. (renard inclus)", "Les ursides.", "Les rapaces.", "Les porcides.", "Les equides.", "Le DRAGON."}, function() user.nose = user_choice user.ears = user_choice return (58 + user_choice) end},
+	 { "@@username", nil, user.color, "Les felins, ce sont mes boules de poils favorites.\nAvec leurs petits coussinets tout mignon, leur petite tete quand ils sont a la recherche de calins, leur facon de se frotter a toi...\nAaaah, je foooonds !", {}, 65},
+	 { "@@username", nil, user.color, "Les canides, ils sont vraiment top ! Que ce soit la loyaute du chien ou la sauvagerie du loup ou meme la mignonitude du renard, ils ont tout pour plaire ces animaux !", {}, 66},
+	 { "@@username", nil, user.color, "Les tous gros tout mignon nounours comme toi ! De toutes les couleurs ou de toutes les tailles, ils me font craquer. J'ai juste envie de leur faire un gros calin tout poilu !\n(Bon choix, joueur, bon choix. - Eikinel, The Dev)", {}, 67},
+	 { "@@username", nil, user.color, "Les aigles, les pyguarges, les hiboux. Ces petits animaux a plumes ont tout ce qu'il y a de plus majestueux. Rapidite, precision et mignonnerie, ce sont de loin les meilleurs !", {}, 68},
+	 { "@@username", nil, user.color, "Les porcides bien sur ! Le sanglier avec ses belles defenses, qui ne recule devant rien. Ou meme le porc avec ses manieres ! Je les adoooooooooooore !", {}, 69},
+	 { "@@username", nil, user.color, "Les equides, il n'y a que ca de vrai ! Se balader sur son dada, l'elever et le dresser... Plus qu'un animal, c'est un ami fidele qui me comprend !", {}, 70},
+	 { "@@username", nil, user.color, "Ils ont beau etre legendaires, je surkiffe les D R A G O N S. Il n'y a pas plus classe que ca ! Qui n'a jamais reve de voler sur le dos d'un dragon hein ? Qui ? Personne ! C'est normal, ce sont les meilleurs. Imposant et terriblement attirant, voila ce que j'aime !", {}, 71},
+	 { versus.name, versus.happy, versus.color, "Ooooh un cat lover ! C'est vrai qu'ils sont mignons. Un classique qui marche a tous les coups !", {}, 72},
+	 { versus.name, versus.laughing, versus.color, "Oh oui ! Un beau husky ou un petit renard comme RonRon sur YouTube, c'est teeeellement mignon !\nJ'ai un pote furry husky, Kouya. C'est une vraie creme !\n(cc Morenatsu, joues-y @@username !)", {}, 72},
+	 { versus.name, versus.embarrassed, versus.color, "Aaaah... Ah oui ?\nSi au moins quelqu'un me trouve attirant alors je suis content. Les calins, c'est une vraie drogue pour moi !", {}, 72},
+	 { versus.name, versus.happy, versus.color, "Un animal a plumes donc ! Je les adore aussi, leur petit bec et leurs grandes ailes me font craquer. Pour sur que si j'en avais un je l'aurais deja pet depuis longtemps !", {}, 72},
+	 { versus.name, versus.happy, versus.color, "Ce n'est pas commun ca ! Ce que j'aime le plus chez les sangliers, ce sont leurs defenses. Iozen, une connaissance a moi, est un sacre champion. Il est respecte de tous, et c'est quelqu'un de formidable !\n(Bakemono no Ko, allez voir le film !)", {}, 72},
+	 { versus.name, versus.happy, versus.color, "Allez hu ! C'est beau un cheval. Vraiment tres intelligent !\nLe seul cheval que je connaisse est un peu arrogant sur les bords, mais je sais bien qu'ils ne sont pas tous comme ca.\n(P.S : Joue a Morenatsu, @@username !)", {}, 72},
+	 { versus.name, versus.embarrassed, versus.color, "Mmmh, les dragons. C'est mon p'tit faible aussi...\nLes ecailles se valent tout autant que la fourrure, et leurs prestences ! Mais leurs prestences ! Je les idealise tellement.", {}, 72},
+	 { versus.name, versus.happy, versus.color, "Personnellement, je les adore tous. Bon, certains plus que d'autres. Mon ordre à moi serait :\nOurs > Loups > Dragons > Sangliers > Lions > Aigles > Chevaux.", {}, 73},
+	 { versus.name, versus.laughing, versus.color, "Mais bon, ce n'est que mon avis. Si tu veux en voir plein, viens sur mon FurAffinity !\n\nhttp://www.furaffinity.net/user/eikinel", {}, 74},
+	 { versus.name, versus.surprised, versus.color, "Oops, ca y est, je fais deja ma pub. Appellez-moi "..versus.name.." l'ours putaclic.\nPassons a autre chose, @@username !", {}, 75},
+
+	 { versus.name, versus.happy, versus.color, "Question sept ! Parlons poils, parlons sourcils !\nLes tiens sont plutot fins et bien dessines ou epais et brousailleux comme moi ? J'espere ne pas avoir l'air trop severe...", {"Tout fin !", "C'est du gros foin", "Je n'en ai pas"}, function() user.eyebrow = user_choice return (76 + user_choice) end},
+	 { "@@username", nil, user.color, "Tout petit riquiqui ! Quand c'est fin, c'est bien.", {}, 80},
+	 { "@@username", nil, user.color, "POOOOIIIIILS ! Toujours plus, encore plus ! Ils sont bien epais comme il faut.", {}, 80},
+	 { "@@username", nil, user.color, "Perdu ! Je n'en ai pas.", {}, 79},
+	 { versus.name, versus.surprised, versus.color, "D'accord, je vois. Je prends ca en note pour ton futur avatar.", {}, 81},
+	 { versus.name, versus.happy, versus.color, "Hehe, un sourcil bien fait donne du caractere ! Ton avatar sera formidable avec ca.", {}, 81},
+	 { versus.name, versus.happy, versus.color, "On arrive bientot a la fin ! Il ne te reste plus qu'une seule question.", {}, 82},
+
+	 { versus.name, versus.happy, versus.color, "Huitieme et ultime question !\nTres tres simplement, de quelle couleur sont tes yeux ?", {"Parfaitement noirs", "Bruns", "Verts", "Bleus", "Gris", "Autre"}, function() user.eye_color = user_choice return (83 + user_choice) end},
+	 { "@@username", nil, user.color, "Ils sont parfaitement noirs. Tellement noirs qu'on pouvait s'y perdre dedans !", {}, 96},
+	 { "@@username", nil, user.color, "Ils sont tout a fait bruns.", {}, 96},
+	 { "@@username", nil, user.color, "Ils sont verdatres.", {}, 96},
+	 { "@@username", nil, user.color, "J'ai les yeux bleus.", {}, 96},
+	 { "@@username", nil, user.color, "J'ai les yeux gris, ca effraie les gens parfois.", {}, 96},
+	 { "@@username", nil, user.color, "Ah non, rien de tout ca pour moi !", {}, 89},
+	 { versus.name, versus.surprised, versus.color, "Ah ! Un peu exotique n'est-ce-pas ? De quelle couleur sont-ils alors ?", {"Rouges", "Violets", "Mauves", "Oranges", "Jaunes", "Bleus marine"}, function() user.eye_color = user_choice return (90 + user_choice) end},
+	 { "@@username", nil, user.color, "Rouges rubis.", {}, 96},
+	 { "@@username", nil, user.color, "D'un violet profond !", {}, 96},
+	 { "@@username", nil, user.color, "Mauves, comme j'aime.", {}, 96},
+	 { "@@username", nil, user.color, "Tu vois le kiwi, le fruit ? Ben ils ne sont pas comme ca.\nLes miens sont oranges !", {}, 96},
+	 { "@@username", nil, user.color, "Jaunes ours, mon poussin. Ou l'inverse, je ne sais plus.", {}, 96},
+	 { "@@username", nil, user.color, "Bleus comme le fond de l'ocean, mon cher ami "..versus.name..".", {}, 96},
+	 { versus.name, versus.laughing, versus.color, "Ca va rendre genial sur ton toi furry, je le sens ! Allez, decouvrons sans plus attendre ton avatar !\n\nEs-tu pret ?", {}, function() gamestate = "avatar" return (98) end},
+	 { "", nil, user.color, "", {}, 99}
       }
    }
    
@@ -139,10 +170,10 @@ function love.load()
       speed = 30,
       collide = 1350
    }
-
+   
    -- Global variables --
    
-   noxt = 1
+   noxt = 81
    gamestate = "entername"
    user_choice = 0
    blink = 0
@@ -166,6 +197,9 @@ function debog()
       love.graphics.print("Hair = "..user.hair, 10, 360)
       love.graphics.print("Hair color = "..user.hair_color, 10, 390)
       love.graphics.print("Nose = "..user.nose, 10, 420)
+      love.graphics.print("Ears = "..user.ears, 10, 450)
+      love.graphics.print("Eyebrow = "..user.eyebrow, 10, 480)
+      love.graphics.print("Eye color = "..user.eye_color, 10, 510)
    end
 end
 
@@ -233,6 +267,7 @@ function love.keypressed(key, isrepeat)
    end
 
    if (gamestate == "entername" and text.n > #text.text) then
+      love.keyboard.setKeyRepeat(true)
       if key == "backspace" then
 	 local byteoffset = utf8.offset(username, -1)
 
@@ -240,6 +275,8 @@ function love.keypressed(key, isrepeat)
 	    username = username:sub(1, byteoffset -1)
 	 end
       end
+   else
+      love.keyboard.setKeyRepeat(false)
    end
 end
 
@@ -264,9 +301,11 @@ function love.draw()
    if not (text.sprite == nil) then 
       love.graphics.draw(text.sprite, 1200, 238, 0, 0.7)
    end
+
    if (debog_bool) then
       debog()
    end
+
    love.graphics.draw(chatbox, 200, 650, 0, 0.9)
    love.graphics.setFont(font.name)
    love.graphics.printf({text.color, text.name}, 250, 665, 300, "center", 0, 1.3, 1)
