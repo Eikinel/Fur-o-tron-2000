@@ -16,6 +16,51 @@ function love.load()
       embarrassed = love.graphics.newImage("sprites/versus/embarrassed.png"),
       surprised = love.graphics.newImage("sprites/versus/surprised.png")
    }
+
+   avatar = {
+      x = (background:getWidth() / 2) - love.graphics.newImage("sprites/faces/face1.png"):getWidth() / 2,
+      y = (background:getHeight() / 2) - love.graphics.newImage("sprites/faces/face1.png"):getHeight() / 2 }
+   
+   avatar.sprites = {
+      face = { love.graphics.newImage("sprites/faces/face1.png") },
+      hairs = { love.graphics.newImage("sprites/hairs/hairs1.png") },
+      ears = { love.graphics.newImage("sprites/ears/ears1.png") },
+      eyebrows = { love.graphics.newImage("sprites/eyebrows/eyebrows1.png") },
+      eyes = {
+	 boy = { love.graphics.newImage("sprites/eyes/boy/eyes1.png") },
+	 girl = { love.graphics.newImage("sprites/eyes/girl/eyes1.png") }
+      },
+      nose = { love.graphics.newImage("sprites/noses/nose1.png") },
+      mouth = { love.graphics.newImage("sprites/mouths/laughing/mouth1.png") }
+   }
+	 
+   avatar.face = { sprite = avatar.sprites.face[1],
+		   x = avatar.x,
+		   y = avatar.y }
+   
+   avatar.hairs = { sprite = avatar.sprites.hairs[1],
+		    x = avatar.x + avatar.sprites.hairs[1]:getWidth() / 2 + 17,
+		    y = avatar.y - avatar.sprites.hairs[1]:getHeight() + 7 }
+
+   avatar.ears = { sprite = avatar.sprites.ears[1],
+		   x = avatar.x + 50,
+		   y = avatar.y - avatar.sprites.ears[1]:getHeight() + 20 }
+
+   avatar.eyebrows = { sprite = avatar.sprites.eyebrows[1],
+		       x = avatar.x + avatar.sprites.eyebrows[1]:getWidth() / 2,
+		       y = avatar.y - 20}
+
+   avatar.eyes = { sprite = avatar.sprites.eyes[1],
+		   x = avatar.eyebrows.x + 10,
+		   y = avatar.eyebrows.y + 70 }
+
+   avatar.nose = { sprite = avatar.sprites.nose[1],
+		   x = avatar.x + avatar.sprites.face[1]:getWidth() / 2 - avatar.sprites.nose[1]:getWidth() / 2 - 30,
+		   y = avatar.y + avatar.sprites.nose[1]:getHeight() + 55 }
+
+   avatar.mouth = { sprite = avatar.sprites.mouth[1],
+		    x = avatar.nose.x - 25,
+		    y = avatar.nose.y + avatar.nose.sprite:getHeight() - 17}
    
    -- Font --
 
@@ -33,7 +78,7 @@ function love.load()
    user = {
       color = {255, 255, 255},
       gender = 0,
-      face_shape = 0,
+      face = 0,
       eye = 0,
       mouth = 0,
       eyebrow_pos = 0,
@@ -57,7 +102,7 @@ function love.load()
 	 { versus.name, versus.happy, versus.color, "Donc tu es un garcon. C'est bon a savoir !\n\nEntre male on se comprend.", {}, 9},
 	 { versus.name, versus.happy, versus.color, "Donc tu es une fille. C'est bon a savoir !\n\nJe sens qu'on va bien s'entendre tous les deux.", {}, 9},
 	 
-	 { versus.name, versus.happy, versus.color, "Mais dis moi, physiquement parlant, t'es plutot du genre bucheron canadien ou petit bambou que je pourrais delicieusement croquer ?", {"Je suis un OURS BIEN VIRIL !", "On m'appelle \"Appetit d'oiseau\"", "Pile dans la moyenne ! Un vrai felin agile."}, function() user.face_shape = user_choice return (10 + user_choice) end},
+	 { versus.name, versus.happy, versus.color, "Mais dis moi, physiquement parlant, t'es plutot du genre bucheron canadien ou petit bambou que je pourrais delicieusement croquer ?", {"Je suis un OURS BIEN VIRIL !", "On m'appelle \"Appetit d'oiseau\"", "Pile dans la moyenne ! Un vrai felin agile."}, function() user.face = user_choice return (10 + user_choice) end},
 
 	 { "@@username", nil, user.color, "Tu m'as bien regarde ? J'ai l'air d'une p'tite brindille ?\nJe \"pese\" dans le milieu, haha !", {}, 13},
 	 { "@@username", nil, user.color, "Ne me mange pas trop vite s'il te plait, j'ai encore beaucoup a vivre...", {}, 13},
@@ -154,8 +199,9 @@ function love.load()
 	 { "@@username", nil, user.color, "Tu vois le kiwi, le fruit ? Ben ils ne sont pas comme ca.\nLes miens sont oranges !", {}, 96},
 	 { "@@username", nil, user.color, "Jaunes ours, mon poussin. Ou l'inverse, je ne sais plus.", {}, 96},
 	 { "@@username", nil, user.color, "Bleus comme le fond de l'ocean, mon cher ami "..versus.name..".", {}, 96},
-	 { versus.name, versus.laughing, versus.color, "Ca va rendre genial sur ton toi furry, je le sens ! Allez, decouvrons sans plus attendre ton avatar !\n\nEs-tu pret ?", {}, function() gamestate = "avatar" return (98) end},
-	 { "", nil, user.color, "", {}, 99}
+	 { versus.name, versus.laughing, versus.color, "Ca va rendre genial sur ton toi furry, je le sens ! Allez, decouvrons sans plus attendre ton avatar !\n\nEs-tu pret ?", {}, 97},
+	 { "", nil, user.color, "", {}, 98},
+	 { versus.name, versus.laughing, versus.color, "Alors ? Comment te trouves-tu ?\nN'es-tu pas magnifique ?", {}, 99}
       }
    }
    
@@ -179,6 +225,7 @@ function love.load()
    blink = 0
    wrong = false
    debog_bool = false
+   print_avatar = false
 end
 
 function debog()
@@ -190,7 +237,7 @@ function debog()
       love.graphics.print("Username = "..username, 10, 160)
       love.graphics.setFont(font.choice)
       love.graphics.print("Gender = "..user.gender, 10, 210)
-      love.graphics.print("Face shape = "..user.face_shape, 10, 240)
+      love.graphics.print("Face = "..user.face, 10, 240)
       love.graphics.print("Eye = "..user.eye, 10, 270)
       love.graphics.print("Mouth = "..user.mouth, 10, 300)
       love.graphics.print("Eyebrow_pos = "..user.eyebrow_pos, 10, 330)
@@ -236,7 +283,7 @@ function love.keypressed(key, isrepeat)
 	 wrong = true
       else
 	 wrong = false
-	 if (gamestate == "normal" or gamestate == "entername" or type(dialogue.text[noxt][6]) == "function") then
+	 if (gamestate == "normal" or gamestate == "entername" or gamestate == "avatar" or type(dialogue.text[noxt][6]) == "function") then
 	    noxt = dialogue.text[noxt][6]
 	 else
 	    noxt = dialogue.text[noxt][6][user_choice + 1]
@@ -246,6 +293,9 @@ function love.keypressed(key, isrepeat)
 	 end
 	 if (noxt == 1) then
 	    gamestate = "entername"
+	 elseif (noxt == 97) then
+	    gamestate = "avatar"
+	    print_avatar = true
 	 elseif (dialogue.text[noxt][5][1]) then
 	    gamestate = "choice"
 	    user_choice = 0
@@ -306,43 +356,68 @@ function love.draw()
       debog()
    end
 
-   love.graphics.draw(chatbox, 200, 650, 0, 0.9)
-   love.graphics.setFont(font.name)
-   love.graphics.printf({text.color, text.name}, 250, 665, 300, "center", 0, 1.3, 1)
-   if (#text.text < 300) then
-      love.graphics.setFont(font.text)
-   else
-      love.graphics.setFont(font.name)
-   end
-   love.graphics.printf({text.color, text.text:sub(1, math.floor(text.n))}, text.x, text.y, text.collide)
-
-   if (gamestate == "normal" and text.n > #text.text and blink > 0.5) then
-      love.graphics.print(">", text.collide, 950)
-   end
-
-   if (gamestate == "entername" and text.n > #text.text) then
-      love.graphics.setFont(font.getname)
-      love.graphics.printf("Ton nom est :\n" .. username, 500, 300, 600, "center")
-      love.graphics.setFont(font.text)
-      if (wrong) then
-	 love.graphics.printf({{222, 17, 17}, "Ton nom doit contenir au moins deux caracteres !"}, 500, 475, 600, "center")
+   if (print_avatar) then
+      
+      if (noxt == 97) then
+	 designAvatar()
+	 love.graphics.draw(avatar.face.sprite, avatar.face.x, avatar.face.y)
+	 love.graphics.draw(avatar.ears.sprite, avatar.ears.x, avatar.ears.y)
+	 love.graphics.draw(avatar.eyebrows.sprite, avatar.eyebrows.x, avatar.eyebrows.y)
+	 love.graphics.draw(avatar.eyes.sprite, avatar.eyes.x, avatar.eyes.y)
+	 love.graphics.draw(avatar.nose.sprite, avatar.nose.x, avatar.nose.y)
+	 love.graphics.draw(avatar.mouth.sprite, avatar.mouth.x, avatar.mouth.y)
+	 love.graphics.draw(avatar.hairs.sprite, avatar.hairs.x, avatar.hairs.y)
+	 love.graphics.print("Appuyez sur la touche \"Entree\" pour continuer -->", 900, background:getHeight() - 100)
+      else
+	 love.graphics.draw(avatar.face.sprite, avatar.face.x - background:getWidth() / 4, avatar.face.y - 150)
+	 love.graphics.draw(avatar.ears.sprite, avatar.ears.x - background:getWidth() / 4, avatar.ears.y - 150)
+	 love.graphics.draw(avatar.eyebrows.sprite, avatar.eyebrows.x - background:getWidth() / 4, avatar.eyebrows.y - 150)
+	 love.graphics.draw(avatar.eyes.sprite, avatar.eyes.x - background:getWidth() / 4, avatar.eyes.y - 150)
+	 love.graphics.draw(avatar.nose.sprite, avatar.nose.x - background:getWidth() / 4, avatar.nose.y - 150)
+	 love.graphics.draw(avatar.mouth.sprite, avatar.mouth.x - background:getWidth() / 4, avatar.mouth.y - 150)
+	 love.graphics.draw(avatar.hairs.sprite, avatar.hairs.x - background:getWidth() / 4, avatar.hairs.y - 150)
       end
    end
    
-   if (gamestate == "choice" and text.n > #text.text) then
-      local x, y = 500, (650 / (#dialogue.text[noxt][5] + 1))
-      if (#dialogue.text[noxt][5] <= 2) then
-	 love.graphics.setFont(font.getname)
-      elseif (#dialogue.text[noxt][5] <= 6) then
-	 love.graphics.setFont(font.name)
+   if not (noxt == 97) then 
+      love.graphics.draw(chatbox, 200, 650, 0, 0.9)
+      love.graphics.setFont(font.name)
+      love.graphics.printf({text.color, text.name}, 250, 665, 300, "center", 0, 1.3, 1)
+      if (#text.text < 300) then
+	 love.graphics.setFont(font.text)
       else
-	 love.graphics.setFont(font.choice)
+	 love.graphics.setFont(font.name)
       end
-      for i = 1, #dialogue.text[noxt][5] do
-	 if (user_choice == i - 1) then
-	    love.graphics.printf({{161, 3, 185}, dialogue.text[noxt][5][i]}, x, y + (650 / (#dialogue.text[noxt][5] + 1)) * (i - 1), 600, "center")
+      love.graphics.printf({text.color, text.text:sub(1, math.floor(text.n))}, text.x, text.y, text.collide)
+      
+      if (gamestate == "normal" and text.n > #text.text and blink > 0.5) then
+	 love.graphics.print(">", text.collide, 950)
+      end
+      
+      if (gamestate == "entername" and text.n > #text.text) then
+	 love.graphics.setFont(font.getname)
+	 love.graphics.printf("Ton nom est :\n" .. username, 500, 300, 600, "center")
+	 love.graphics.setFont(font.text)
+	 if (wrong) then
+	    love.graphics.printf({{222, 17, 17}, "Ton nom doit contenir au moins deux caracteres !"}, 500, 475, 600, "center")
+	 end
+      end
+      
+      if (gamestate == "choice" and text.n > #text.text) then
+	 local x, y = 500, (650 / (#dialogue.text[noxt][5] + 1))
+	 if (#dialogue.text[noxt][5] <= 2) then
+	    love.graphics.setFont(font.getname)
+	 elseif (#dialogue.text[noxt][5] <= 6) then
+	    love.graphics.setFont(font.name)
 	 else
-	    love.graphics.printf(dialogue.text[noxt][5][i], x, y + (650 / (#dialogue.text[noxt][5] + 1)) * (i - 1), 600, "center")
+	    love.graphics.setFont(font.choice)
+	 end
+	 for i = 1, #dialogue.text[noxt][5] do
+	    if (user_choice == i - 1) then
+	       love.graphics.printf({{161, 3, 185}, dialogue.text[noxt][5][i]}, x, y + (650 / (#dialogue.text[noxt][5] + 1)) * (i - 1), 600, "center")
+	    else
+	       love.graphics.printf(dialogue.text[noxt][5][i], x, y + (650 / (#dialogue.text[noxt][5] + 1)) * (i - 1), 600, "center")
+	    end
 	 end
       end
    end
@@ -362,4 +437,29 @@ end
 
 function myString(str)
    return string.gsub(str, "@@([a-zA-Z_][_a-zA-Z0-9]*)", function (a) return _G[a] or "@@"..a end)
+end
+
+function designAvatar()
+   avatar.face.sprite = avatar.sprites.face[user.face + 1]
+   avatar.x = (background:getWidth() / 2) - avatar.face.sprite:getWidth() / 2
+   avatar.y = (background:getHeight() / 2) - avatar.face.sprite:getHeight() / 2
+   avatar.hairs.sprite = avatar.sprites.hairs[user.hair + 1]
+   avatar.ears.sprite = avatar.sprites.ears[user.ears + 1]
+   avatar.eyebrows.sprite = avatar.sprites.eyebrows[user.eyebrow + 1]
+
+   if (user.gender == 0) then
+      user.gender = "boy"
+   else
+      user.gender = "girl"
+   end
+   avatar.eyes.sprite = avatar.sprites.eyes[user.gender][user.eye + 1]
+   avatar.nose.sprite = avatar.sprites.nose[user.nose + 1]
+   
+   if (user.mouth == 0) then
+      avatar.mouth.sprite = love.graphics.newImage("sprites/mouths/laughing/mouth".. user.mouth + 1 ..".png")
+   elseif (user.mouth == 1) then
+      avatar.mouth.sprite = love.graphics.newImage("sprites/mouths/serious/mouth".. user.mouth + 1 ..".png")
+   elseif (user.mouth == 2) then
+      avatar.mouth.sprite = love.graphics.newImage("sprites/mouths/normal/mouth".. user.mouth + 1 ..".png")
+   end
 end
