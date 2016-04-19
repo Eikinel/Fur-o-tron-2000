@@ -1,7 +1,7 @@
 function love.conf(t)
    t.version = "0.10.0"
    
-   t.window.title = "Shapeshifting"
+   t.window.title = "Fur-o-tron 2000"
    t.window.width = 1920
    t.window.height = 1080
    t.window.borderless = false
