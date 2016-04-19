@@ -111,13 +111,20 @@ function love.load()
 	 { versus.name, versus.happy, versus.color, "Encore une petite anecdote ursidesque.\nSavais-tu que les ours blancs n'etaient pas vraiment blanc ? En realite, ses poils sont non pigmentes, translucide et creux. L'impression de blanc est uniquement du a la reflexion de la lumiere sur la partie interne du poil. Les ours blancs sont memes noir de peau !", {}, 56},
 	 { versus.name, versus.embarrassed, versus.color, "Mais je m'egare encore. Decidement, je n'arreterai jamais de parler. Je suis une vraie pipelette !", {}, 57},
 	 
-	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\nParmi toutes ces familles d'animaux, lequel preferes-tu ?", {"Le felin.", "Le canide. (renard inclus)", "Les ursides.", "Les rapaces.", "Les porcides.", "Le DRAGON."}, function() user.nose = user_choice return (58 + user_choice) end},
+	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\nParmi toutes ces familles d'animaux, lequel preferes-tu ?", {"Le felin.", "Le canide. (renard inclus)", "Les ursides.", "Les rapaces.", "Les porcides.", "Les equides.", "Le DRAGON."}, function() user.nose = user_choice return (58 + user_choice) end},
 	 { "@@username", nil, user.color, "Les felins, ce sont mes boules de poils favorites.\nAvec leurs petits coussinets tout mignon, leur petite tete quand ils sont a la recherche de calins, leur facon de se frotter a toi...\nAaaah, je foooonds !", {}, 64},
-	 { "@@username", nil, user.color, "Les canides, ils sont vraiment top ! Que ce soit la loyaute du chien ou la sauvagerie du loup ou meme la mignonitude du renard, ils ont tout pour plaire ces animaux !", {}, 64},
-	 { "@@username", nil, user.color, "Les tous gros tout mignon nounours comme toi ! De toutes les couleurs ou de toutes les tailles, ils me font craquer. J'ai juste envie de leur faire un gros calin tout poilu !\n(Bon choix, joueur, bon choix. - Eikinel, The Dev)", {}, 64},
-	 { "@@username", nil, user.color, "Les aigles, les pyguarges, les hiboux. Ces petits animaux a plumes ont tout ce qu'il y a de plus majestueux. Rapidite, precision et mignonnerie, ce sont de loin les meilleurs !", {}, 64},
-	 { "@@username", nil, user.color, "Les porcides bien sur ! Le sanglier avec ses belles defenses, qui ne recule devant rien. Ou meme le porc avec ses manieres ! Je les adoooooooooooore !", {}, 64},
-	 { "@@username", nil, user.color, "Ils ont beau etre legendaires, je surkiffe les D R A G O N S. Il n'y a pas plus classe que ca ! Qui n'a jamais reve de voler sur le dos d'un dragon hein ? Qui ? Personne ! C'est normal, ce sont les meilleurs. Imposant et terriblement attirant, voila ce que j'aime !", {}, 64},
+	 { "@@username", nil, user.color, "Les canides, ils sont vraiment top ! Que ce soit la loyaute du chien ou la sauvagerie du loup ou meme la mignonitude du renard, ils ont tout pour plaire ces animaux !", {}, 65},
+	 { "@@username", nil, user.color, "Les tous gros tout mignon nounours comme toi ! De toutes les couleurs ou de toutes les tailles, ils me font craquer. J'ai juste envie de leur faire un gros calin tout poilu !\n(Bon choix, joueur, bon choix. - Eikinel, The Dev)", {}, 66},
+	 { "@@username", nil, user.color, "Les aigles, les pyguarges, les hiboux. Ces petits animaux a plumes ont tout ce qu'il y a de plus majestueux. Rapidite, precision et mignonnerie, ce sont de loin les meilleurs !", {}, 67},
+	 { "@@username", nil, user.color, "Les porcides bien sur ! Le sanglier avec ses belles defenses, qui ne recule devant rien. Ou meme le porc avec ses manieres ! Je les adoooooooooooore !", {}, 68},
+	 { "@@username", nil, user.color, "Les equides, il n'y a que ca de vrai ! Se balader sur son dada, l'elever et le dresser... Plus qu'un animal, c'est un ami fidele qui me comprend !", {}, 68},
+	 { "@@username", nil, user.color, "Ils ont beau etre legendaires, je surkiffe les D R A G O N S. Il n'y a pas plus classe que ca ! Qui n'a jamais reve de voler sur le dos d'un dragon hein ? Qui ? Personne ! C'est normal, ce sont les meilleurs. Imposant et terriblement attirant, voila ce que j'aime !", {}, 68},
+	 { versus.name, versus.happy, versus.color, "Ooooh un cat lover ! C'est vrai qu'ils sont mignons. Un classique qui marche a tous les coups !", {}, 76},
+	 { versus.name, versus.laughing, versus.color, "Oh oui ! Un beau husky ou un petit renard comme RonRon (foxialzabul sur YouTube !), c'est teeeellement mignon !\nJ'ai un pote furry husky, Kouya. C'est une vraie creme !", {}, 76},
+	 { versus.name, versus.embarrassed, versus.color, "Aaaah... Ah oui ?\nSi au moins quelqu'un me trouve attirant alors je suis content. Les calins, c'est une vraie drogue pour moi !", {}, 76},
+	 { versus.name, versus.happy, versus.color, "Un animal a plumes donc ! Je les adore aussi, leur petit bec et leurs grandes ailes me font craquer. Pour sur que si j'en avais un je l'aurais deja pet depuis longtemps !", {}, 76},
+	 { versus.name, versus.happy, versus.color, "Ce n'est pas commun ca ! Ce que j'aime le plus chez les sangliers, ce sont leurs defenses. Iozen, une connaissance a moi, est un sacre champion. Il est respecte de tous, et c'est quelqu'un de formidable !\n(Bakemono no Ko, allez voir le film !)", {}, 76},
+	 { versus.name, versus.happy, versus.color, "Allez hu ! C'est beau un cheval. Vraiment tres intelligent !\nLe seul cheval que je connaisse est un peu arrogant sur les bords, mais je sais bien qu'ils ne sont pas tous comme ca.\n(P.S : Joue a Morenatsu, @@username !)", {}, 76},
       }
    }
    
@@ -135,7 +142,7 @@ function love.load()
 
    -- Global variables --
    
-   noxt = 56
+   noxt = 1
    gamestate = "entername"
    user_choice = 0
    blink = 0
@@ -150,7 +157,15 @@ function debog()
       love.graphics.print("Noxt = "..noxt, 10, 60)
       love.graphics.print("User_choice = "..user_choice, 10, 110)
       love.graphics.print("Username = "..username, 10, 160)
-      love.graphics.print("User_weight = "..user.weight, 10, 210)
+      love.graphics.setFont(font.choice)
+      love.graphics.print("Gender = "..user.gender, 10, 210)
+      love.graphics.print("Face shape = "..user.face_shape, 10, 240)
+      love.graphics.print("Eye = "..user.eye, 10, 270)
+      love.graphics.print("Mouth = "..user.mouth, 10, 300)
+      love.graphics.print("Eyebrow_pos = "..user.eyebrow_pos, 10, 330)
+      love.graphics.print("Hair = "..user.hair, 10, 360)
+      love.graphics.print("Hair color = "..user.hair_color, 10, 390)
+      love.graphics.print("Nose = "..user.nose, 10, 420)
    end
 end
 
@@ -179,7 +194,7 @@ function love.keypressed(key, isrepeat)
    end
    
    if (key == "space") then
-      text.speed = text.speed * 3
+      text.speed = text.speed * #text.text--3
    end
 
    if (key == "return" and text.n > #text.text) then
@@ -230,7 +245,7 @@ end
 
 function love.keyreleased(key)
    if (key == "space") then
-      text.speed = text.speed / 3
+      text.speed = text.speed / #text.text--3
    end
 end
 
@@ -255,7 +270,11 @@ function love.draw()
    love.graphics.draw(chatbox, 200, 650, 0, 0.9)
    love.graphics.setFont(font.name)
    love.graphics.printf({text.color, text.name}, 250, 665, 300, "center", 0, 1.3, 1)
-   love.graphics.setFont(font.text)
+   if (#text.text < 300) then
+      love.graphics.setFont(font.text)
+   else
+      love.graphics.setFont(font.name)
+   end
    love.graphics.printf({text.color, text.text:sub(1, math.floor(text.n))}, text.x, text.y, text.collide)
 
    if (gamestate == "normal" and text.n > #text.text and blink > 0.5) then
