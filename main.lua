@@ -33,10 +33,14 @@ function love.load()
    user = {
       color = {255, 255, 255},
       gender = 0,
-      weight = 0,
-      kindness = 0,
-      funny = 0,
-      hairy = 0,
+      face_shape = 0,
+      eye = 0,
+      mouth = 0,
+      eyebrow_pos = 0,
+      hair = 0,
+      hair_color = 0,
+      nose = 0,
+      
    }
    
    dialogue = {
@@ -48,35 +52,65 @@ function love.load()
 	   
 	 { "@@username", nil, user.color, "Sans contrefacon, je suis un garcon !", {}, 7},
 	 { "@@username", nil, user.color, "Je suis une fille. G-A-R-C-O-N. Une fille.", {}, 8},
-	 
 	 { versus.name, versus.happy, versus.color, "Donc tu es un garcon. C'est bon a savoir !\n\nEntre male on se comprend.", {}, 9},
 	 { versus.name, versus.happy, versus.color, "Donc tu es une fille. C'est bon a savoir !\n\nJe sens qu'on va bien s'entendre tous les deux.", {}, 9},
 	 
-	 { versus.name, versus.happy, versus.color, "Mais dis moi, physiquement parlant, t'es plutot du genre bucheron canadien ou petit bambou que je pourrais delicieusement croquer ?", {"Je suis un OURS BIEN VIRIL !", "On m'appelle \"Appetit d'oiseau\"", "Pile dans la moyenne ! Un vrai felin agile."}, function() user.weight = user_choice return (10 + user_choice) end},
+	 { versus.name, versus.happy, versus.color, "Mais dis moi, physiquement parlant, t'es plutot du genre bucheron canadien ou petit bambou que je pourrais delicieusement croquer ?", {"Je suis un OURS BIEN VIRIL !", "On m'appelle \"Appetit d'oiseau\"", "Pile dans la moyenne ! Un vrai felin agile."}, function() user.face_shape = user_choice return (10 + user_choice) end},
 
 	 { "@@username", nil, user.color, "Tu m'as bien regarde ? J'ai l'air d'une p'tite brindille ?\nJe \"pese\" dans le milieu, haha !", {}, 13},
 	 { "@@username", nil, user.color, "Ne me mange pas trop vite s'il te plait, j'ai encore beaucoup a vivre...", {}, 13},
 	 { "@@username", nil, user.color, "Je suis dans le vert ! Pas trop gros pour passer dans le terrier du lapin mais je passe difficilement quand meme !", {}, 13},
-	 
 	 { versus.name, versus.happy, versus.color, "Hum, je vois.\nLe plus important quand on parle de son poids n'est pas de savoir ce que les autres pensent de toi mais d'etre bien dans ta peau.", {}, 14},
 	 { versus.name, versus.laughing, versus.color, "D'ailleurs, le savais-tu ? Tous les ours ne sont pas gros. La race des ours a collier font entre 50 et 100kg pour la femelle tandis que les ours blanc peuvent aller jusqu'a 700kg et plus chez le male !", {}, 15},
 	 { versus.name, versus.happy, versus.color, "Bon, je te rassure, en tant qu'ours antropomorphe, je pese pour ma part 90kg, je ne risque pas de t'ecraser. Et encore moins de te mordre.", {}, 16},
 	 { versus.name, versus.embarrassed, versus.color, "Oups, mais je m'egare... Question suivante !", {}, 17},
-	 { versus.name, versus.happy, versus.color, "De maniere sociale, comment te sens-tu avec ton entourage ?", {"Si seulement les free hugs ne se faisait pas qu'en convention...", "Si tu me touches, garre aux morsures !", "Je... Je ne parle pas beaucoup aux gens."}, function() user.kindness = user_choice return (18 + user_choice) end},
+	 
+	 { versus.name, versus.happy, versus.color, "De maniere sociale, comment te sens-tu avec ton entourage ?", {"Si seulement les free hugs ne se faisait pas qu'en convention...", "Si tu me touches, garre aux morsures !", "Je... Je ne parle pas beaucoup aux gens."}, function() user.eye = user_choice return (18 + user_choice) end},
 
 	 { "@@username", nil, user.color, "Si seulement les free hugs ne se faisait pas qu'en convention... Tiens d'ailleurs, viens par la mon p'tit ourson !", {}, 21},
 	 { "@@username", nil, user.color, "Si tu me touches, garre aux morsures ! Je peux me mettre en colere tres facilement, alors mieux vaut ne pas trop me deranger.", {}, 22},
 	 { "@@username", nil, user.color, "Je... Je ne parle pas beaucoup aux gens. C'est deja enorme pour moi d'etre venu te parler, je suis de nature plutot timide.", {}, 23},
-
 	 { versus.name, versus.embarrassed, versus.color, "Aaah... Ahem. Bon, un petit calin alors et on reprend.", {}, 24},
 	 { versus.name, versus.surprised, versus.color, "Wow ! OK, je tacherai de m'en souvenir, je ne voudrais pas entacher notre amitie naissante.", {}, 24},
 	 { versus.name, versus.happy, versus.color, "Je comprends, ca peut faire peur d'aller vers les gens. C'est super que tu viennes me parler, j'adore discuter avec des gens gentils. La communication est la meilleur facon de se comprendre !", {}, 24},
 
-	 { versus.name, versus.happy, versus.color, "Troisieme question !\nPour moi, l'humour est une chose essentielle. Il nous fait nous sentir bien et vivant, en plus de partager un moment de detente entre amis. Mais pour toi, qu'en est-il ?", {"Je suis le roi des blagues !", "Je ne suis pas du genre bon public.", "Rigoler, c'est bien !"}, function() user.kindness = user_choice return (25 + user_choice) end},
+	 { versus.name, versus.happy, versus.color, "Troisieme question !\nPour moi, l'humour est une chose essentielle. Il nous fait nous sentir bien et vivant, en plus de partager un moment de detente entre amis. Mais pour toi, qu'en est-il ?", {"Je suis le roi des blagues !", "Je ne suis pas du genre bon public.", "Rigoler, c'est bien !"}, function() user.mouth = user_choice user.eyebrow_pos = user_choice return (25 + user_choice) end},
 
 	 { "@@username", nil, user.color, "Carambar, embauchez-moi !\nNon, vraiment, sans rire, rire c'est ma passion. Rire ca fait du bien, alors pourquoi s'en priver ?", {}, 28},
 	 { "@@username", nil, user.color, "Malheureusement, ce n'est pas mon cas. Je rigole peu, tant que je vis ca me suffit amplement.", {}, 29},
 	 { "@@username", nil, user.color, "C'est bon de rire ! Toutefois il faut savoir etre serieux. J'aime bien rire et faire rire, mais sans plus.", {}, 30},
+	 { versus.name, versus.laughing, versus.color, "Haha oui ! C'est le genre d'etat d'esprit que j'aime bien voir !\nAu fait, tu la connais celle-la ?", {}, 31},
+	 { versus.name, versus.happy, versus.color, "Soit, apres tout nous vivons comme on veut. Si ca te convient comme ca je n'ai aucune raison de vouloir te faire changer d'avis.", {}, 35},
+	 { versus.name, versus.happy, versus.color, "C'est vrai, tu as bien raison. Tout le temps faire le clown peut vite deranger certaines personnes autour de toi. Rire, oui, mais dans le respect !", {}, 35},
+	 { versus.name, versus.happy, versus.color, "Quel est le comble pour un dentiste ?\n........\n........", {}, 32},
+	 { versus.name, versus.laughing, versus.color, "C'est de trouver sa femme au lit avec un MALE DEDANS !\n\nHAHAHAHAHAHA !", {}, 33},
+	 { "@@username", nil, user.color, "...\nHAHAHA ! Oh mon dieu elle etait terrible celle-la ! Apres cet interrogatoire, il faudra vraiment que je te raconte tout ce que je connais !", {}, 34},
+	 { versus.name, versus.laughing, versus.color, "Avec plaisir mon ami @@username !", {}, 35},
+
+	 { versus.name, versus.happy, versus.color, "Allez, question suivante ! Numero quatre.\nDe quelle taille son tes cheveux ?", {"Tout court.", "Long, long, long.", "Mi-long, a peu pres jusqu'au epaules.", "Je n'en ai pas."}, function() user.hair = user_choice return (36 + user_choice) end},
+	 { "@@username", nil, user.color, "Ils sont plutot court. Un peu de poil sur le caillou c'est juste ce qu'il faut !", {}, 41},
+	 { "@@username", nil, user.color, "Je l'aime longue et lourde.\nWait, je parlais de ma chevelure, coquin.", {}, 41},
+	 { "@@username", nil, user.color, "Petit ou grand cheveux... Foutaises ! C'est so 2012.\nMi-long, ca c'est le style !", {}, 41},
+	 { "@@username", nil, user.color, "Je ne fais pas les choses a moitie. C'est tout ou rien !\nBah pour moi j'ai choisi rien. Je suis a 200% pour la fourrure, mais des poils glabres comme les humains... Berk !", {}, 40},
+	 { versus.name, versus.laughing, versus.color, "La fourrure, c'est tout ce qu'il y a de mieux !\nC'est doux, c'est chaud, c'est beau. Que demander de plus ?", {}, 42},
+	 { versus.name, versus.happy, versus.color, "Sympa ! C'est un style qui se vaut.", {}, 42},
+
+	 { versus.name, versus.happy, versus.color, "Dans la foulee, que peux-tu me dire sur la couleur de tes cheveux ?", {"Ils sont noirs", "Ils sont marrons", "Ils sont blonds", "Ils sont blancs", "Ils sont roux", "Ils sont bleus", "Ils sont verts", "Ils sont violets", "Ils sont pas"}, function() user.hair_color = user_choice return (43 + user_choice) end},
+	 { "@@username", nil, user.color, "Ils sont noirs comme la nuit.", {}, 52},
+	 { "@@username", nil, user.color, "Ils sont marrons comme ta fourrure.", {}, 52},
+	 { "@@username", nil, user.color, "Ils sont blonds comme les bles.", {}, 52},
+	 { "@@username", nil, user.color, "Ils sont blancs comme neige.", {}, 53},
+	 { "@@username", nil, user.color, "Ils sont roux. Et j'ai une ame.", {}, 52},
+	 { "@@username", nil, user.color, "Ils sont bleus comme... du bleu.", {}, 53},
+	 { "@@username", nil, user.color, "Ils sont verts, et non, je n'ai pas essaye de faire du Cetelem.", {}, 53},
+	 { "@@username", nil, user.color, "Ils sont violets. (Couleur preferee du dev, respectez !)", {}, 53},
+	 { "@@username", nil, user.color, "Ils sont pas, je suis chauve !", {}, 54},
+	 { versus.name, versus.happy, versus.color, "C'est une belle couleur ! J'aime beaucoup.", {}, 55},
+	 { versus.name, versus.surprised, versus.color, "Oh tiens ! C'est pas commun comme couleur de cheveux ca !\nJ'ai hate de voir ce que ca va donner sur ton avatar...", {}, 55},
+	 { versus.name, versus.embarrassed, versus.color, "Oups, question debile du coup, il est vrai.\nVite, passons a autre chose avant que j'ai l'air trop bete !", {}, 55},
+	 { versus.name, versus.happy, versus.color, "Encore une petite anecdote ursidesque.\nSavais-tu que les ours blancs n'etaient pas vraiment blanc ? En realite, ses poils sont non pigmentes, translucide et creux. L'impression de blanc est uniquement du a la reflexion de la lumiere sur la partie interne du poil. Les ours blancs sont memes noir de peau !", {}, 56},
+	 { versus.name, versus.embarrassed, versus.color, "Mais je m'egare encore. Decidement, je n'arreterai jamais de parler. Je suis une vraie pipelette !", {}, 57},
+	 { versus.name, versus.happy, versus.color, "Un... deux... trois... SIX ! Question numero six ! C'est que je perds le fil moi.\n", {""}, function() user.nose = user_choice return (58 + user_choice) end}
       }
    }
    
